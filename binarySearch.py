@@ -6,9 +6,9 @@ def binarySearchWithRecurssion(list, target, l, r):
         return True
     
     if list[mid] > target:
-        binarySearchWithRecurssion(list, target, l, mid - 1)
+        return binarySearchWithRecurssion(list, target, l, mid - 1)
     elif list[mid] < target:
-        binarySearchWithRecurssion(list, target, mid + 1, r)
+        return binarySearchWithRecurssion(list, target, mid + 1, r)
     return False
 
 if __name__ == '__main__':
