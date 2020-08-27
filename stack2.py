@@ -1,30 +1,45 @@
-# buildings = [2, 4, 8]
+# your code goes here
 
-def solve(buildings):
-    ans = 0
-    for i in range(0, len(buildings)):
-        
-        right_blocking_building_idx = -1
-        left_blocking_building_idx = -1
 
-        for right in range(i + 1, len(buildings)):
-            if buildings[right] > buildings[i]:
-                right_blocking_building_idx = right
-                break
 
-        for left in range(i - 1, -1, -1):
-            if buildings[left] > buildings[i]:
-                left_blocking_building_idx = left
-                break
-        
-        if left_blocking_building_idx == -1 or right_blocking_building_idx == -1:
-            ans += 0   
-        else:
-            ht = min(buildings[right_blocking_building_idx], buildings[left_blocking_building_idx]) - buildings[i]
-            breath = abs(right_blocking_building_idx - left_blocking_building_idx) - 1
-            ans += ht * breath
-    return ans
-
+	
+def heapify(idx, heap):
+	if 2 * idx + 1 >= len(heap):
+		return
+	
+	left = 2 * idx + 1
+	right = 2 * idx + 2
+	
+	max_idx = idx
+	
+	if left < len(heap) and heap[left] > heap[max_idx]:
+		max_idx = left
+	
+	if right < len(heap) and heap[right] > heap[max_idx]:
+		max_idx = right
+		
+	if max_idx != idx:
+		heap[max_idx], heap[idx] = heap[idx], heap[max_idx]
+		heapify(max_idx, heap)
+		
+def get_max(heap):
+	max_ele = heap[0]
+	heap[0], heap[len(heap) - 1] = heap[len(heap) - 1], heap[0]
+	heap = heap[:-1]
+	heapify(0)
+	return max_ele
+	
+def build(heap):
+	idx = len(heap) - 1
+	while idx >= 0:
+		heapify(idx, heap)
+		idx -= 1
+		
 if __name__ == '__main__':
-    print(solve([4, 2, 8]))
-    
+	heap = [1,55,33,11,223,42,12]
+	build(heap)
+	
+	n = len(heap)
+	for i in range(n):
+		print(get_max(heap))
+
