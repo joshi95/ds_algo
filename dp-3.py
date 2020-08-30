@@ -19,4 +19,4 @@ def solveMinCoins(coinsArray, idx, sum):
 if __name__ == '__main__':
     dp = [[-1 for x in range(1000)] for x in range(1000)]
     print(solveMinCoins([1,2,5], 0, 11))
-    D2. A3. A4. C5. B
+   
